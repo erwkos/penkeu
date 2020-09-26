@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    #id_jumlah_suami_istri, 
+    #id_jumlah_anak, 
+    #id_jumlah_suami_istri,
+    #id_gaji_pokok,
+    #id_tunjangan_istri,
+    #id_tunjangan_anak,
+    #id_tunjangan_eselon,
+    #id_tunjangan_fungsional,
+    #id_tunjangan_struktural,
+    #id_tunjangan_umum,
+    #id_tunjangan_sertifikasi,
+    #id_tunjangan_jasa_medis,
+    #id_tunjangan_penghasilan_pegawai
+    {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.5rem + 2px);
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #687281;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #c5ccd6;
+        border-radius: 0.35rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    #id_user, #id_status_pegawai {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 1rem + 2px);
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #687281;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #c5ccd6;
+        border-radius: 0.35rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    }
+</style>
+
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Update Data Pegawai</h1>
+    <div class="card shadow mb-4" >
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger">Data Pegawai</h6>
+        </div>
+        <div class="card-body">
+            <table>
+                <tr>
+                    <td>Nama Lengkap</th>
+                    <td>: {{datapegawai.nama_pegawai}}</td>
+                </tr>
+                <tr>
+                    <td>NIP</th>
+                    <td>: {{datapegawai.nip}}</td>
+                </tr>
+                <tr>
+                    <td>SKPD</th>
+                    <td>: {{datapegawai.skpd}}</td>
+                </tr>
+                <tr>
+                    <td>Pemda</th>
+                    <td>: {{datapegawai.pemda}}</td>
+                </tr>
+                <tr>
+                    <td>Bulan Penagihan</th>
+                    <td>: {{datapegawai.bulan|date:'M-Y'}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <form action="" method="POST">
+            <!-- Content Row -->
+        <div class="row">
+            <div class="col-lg-6">
+            <!-- Perubahan Data Pegawai-->
+            <div class="card mb-4">
+                <a href="#collapseCardPerubahan" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-primary">Perubahan Data Pegawai</h6>
+                </a>
+                <div class="collapse hide" id="collapseCardPerubahan">
+                <div class="card-body">
+                    {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Jumlah Suami/Istri</label></th>
+                                <td>{{form.jumlah_suami_istri}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Jumlah Anak</label></th>
+                                <td>{{form.jumlah_anak}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Gaji Pokok</label></th>
+                                <td>{{form.gaji_pokok}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Istri</label></th>
+                                <td>{{form.tunjangan_istri}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Anak</label></th>
+                                <td>{{form.tunjangan_anak}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Eselon</label></th>
+                                <td>{{form.tunjangan_eselon}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Fungsional</label></th>
+                                <td>{{form.tunjangan_fungsional}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Struktural</label></th>
+                                <td>{{form.tunjangan_struktural}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Umum</label></th>
+                                <td>{{form.tunjangan_umum}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Sertifikasi</label></th>
+                                <td>{{form.tunjangan_sertifikasi}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Jasa Medis</label></th>
+                                <td>{{form.tunjangan_jasa_medis}}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="" style="margin-bottom:0rem">Tunjangan Penghasilan</label></th>
+                                <td>{{form.tunjangan_penghasilan_pegawai}}</td>
+                            </tr>
+                        </table>  
+                        <br>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                          
+                </div>
+                </div>
+            </div>
+            </div>
+
+        <div class="col-lg-6">
+            <!-- Mutasi Pegawai-->
+            <div class="card">
+                <a href="#collapseCardMutasi" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-primary">Mutasi Pegawai</h6>
+                </a>
+                <div class="collapse hide" id="collapseCardMutasi">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td><label for="" style="margin-bottom:0rem">SKPD </label></th>
+                            <td>{{form.user}}</td>
+                        </tr>
+                        <tr>
+                            <td><label for="" style="margin-bottom:0rem">Status Pegawai </label></th>
+                            <td>{{form.status_pegawai}}</td>
+                        </tr>
+                    </table>   
+                    <br>
+                    <button type="submit" class="btn btn-primary">Kirim</button>               
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+            
+    </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+$(document).ready(function() {
+    $("#id_jumlah_suami_istri").attr({
+       "max" : 1,               
+    });
+    $("#id_jumlah_anak").attr({
+       "max" : 2,               
+    });
+});
+
+</script>
+{% endblock %}

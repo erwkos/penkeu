@@ -1,0 +1,363 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block dashboardpegawai %}active{% endblock %}
+
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+    </div>
+
+    <!-- Search Bulan -->
+    <div class="card shadow mb-4" >
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-danger">Pilih Bulan</h6>
+      </div>
+      <form>
+        <div class="card-body">
+            <div class="form-row align-items-center container-fluid">
+                <div class="col-auto my-1">
+                    <label for="exampleFormControlSelect1" style="margin-bottom:0rem">Bulan: </label>
+                </div>
+                <div class="col-auto my-1">
+                    <select class="custom-select mr-sm-2" name="bulan_month" id="id_bulan_month">
+                        <option value="01" {% if request.GET.bulan_month == '01' %}selected {% endif %}>Januari</option>
+                        <option value="02" {% if request.GET.bulan_month == '02' %}selected {% endif %}>Februari</option>
+                        <option value="03" {% if request.GET.bulan_month == '03' %}selected {% endif %}>Maret</option>
+                        <option value="04" {% if request.GET.bulan_month == '04' %}selected {% endif %}>April</option>
+                        <option value="05" {% if request.GET.bulan_month == '05' %}selected {% endif %}>Mei</option>
+                        <option value="06" {% if request.GET.bulan_month == '06' %}selected {% endif %}>Juni</option>
+                        <option value="07" {% if request.GET.bulan_month == '07' %}selected {% endif %}>Juli</option>
+                        <option value="08" {% if request.GET.bulan_month == '08' %}selected {% endif %}>Agustus</option>
+                        <option value="09" {% if request.GET.bulan_month == '09' %}selected {% endif %}>September</option>
+                        <option value="10" {% if request.GET.bulan_month == '10' %}selected {% endif %}>Oktober</option>
+                        <option value="11" {% if request.GET.bulan_month == '11' %}selected {% endif %}>November</option>
+                        <option value="12" {% if request.GET.bulan_month == '12' %}selected {% endif %}>Desember</option>
+                        </select>
+                </div>
+                <div class="col-auto my-1">
+                    <select class="custom-select mr-sm-2" name="bulan_year" id="id_bulan_year">
+                        <option value="2020" {% if request.GET.bulan_year == '2020' %}selected {% endif %}>2020</option>
+                    </select>
+                </div>
+                <div class="col-auto my-1">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"> Pilih</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Content Row 1 -->
+    <div class="row">
+
+      <!-- Dashboard Jlh Pegawai -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jlh Pegawai ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {% if jumlah_pegawai == 0 %}
+                    -
+                  {% else %}
+                    {{jumlah_pegawai|intcomma}}
+                  {% endif %}
+                  </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Jlh Tanggungan-->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Jlh Tanggungan ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {% if jumlah_tanggungan == 0 %}
+                  -
+                {% else %}
+                  {{jumlah_tanggungan|intcomma}}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Gaji Pokok -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Gaji Pokok ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                    {% if gaji_pokok == 0 %}
+                      -
+                    {% else %}
+                      {{gaji_pokok|intcomma}}
+                    {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Jlh. Tunjangan Istri -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Tunjangan Istri ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {% if tunjangan_istri == 0 %}
+                  -
+                {% else %}
+                  {{tunjangan_istri|intcomma}}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Row 2 -->
+    <div class="row">
+
+      <!-- Dashboard Tunjunagan Anak -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tunjangan Anak ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {% if tunjangan_anak == 0 %}
+                    -
+                  {% else %}
+                    {{tunjangan_anak|intcomma}}
+                  {% endif %}
+                  </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Tunjangan Eselon-->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tunjungan Eselon ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {% if tunjangan_eselon == 0 %}
+                  -
+                {% else %}
+                  {{tunjangan_eselon|intcomma}}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Tunjangan Fungsional -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tunj. Fungsional ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                    {% if tunjangan_fungsional == 0 %}
+                      -
+                    {% else %}
+                      {{tunjangan_fungsional|intcomma}}
+                    {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Jlh. Tunjangan Struktural -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Tunj. Struktural ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {% if tunjangan_struktural == 0 %}
+                  -
+                {% else %}
+                  {{tunjangan_struktural|intcomma}}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Row 3 -->
+    <div class="row">
+
+      <!-- Dashboard Tunj. Umum  -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tunj. Umum ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                  {% if tunjangan_umum == 0 %}
+                    -
+                  {% else %}
+                    {{tunjangan_umum|intcomma}}
+                  {% endif %}
+                  </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Tunjangan Sertifikasi-->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tunj. Sertifikasi ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {% if tunjangan_sertifikasi == 0 %}
+                  -
+                {% else %}
+                  {{tunjangan_sertifikasi|intcomma}}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Tunj Medis -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tunj. Medis ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-auto">
+                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                    {% if tunjangan_jasa_medis == 0 %}
+                      -
+                    {% else %}
+                      {{tunjangan_jasa_medis|intcomma}}
+                    {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Tunjungan Penghasilan Pegawai -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Jlh. TPP ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {% if tunjangan_penghasilan_pegawai == 0 %}
+                  -
+                {% else %}
+                  {{tunjangan_penghasilan_pegawai|intcomma}}
+                {% endif %}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+{% endblock %}

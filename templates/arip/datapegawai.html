@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block tablenav %}active{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Data Pegawai</h1>
+    <!-- Month Selection -->
+    <div class="card shadow mb-4" >
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger">Pilih Bulan</h6>
+        </div>
+        <form>
+            <div class="card-body">
+                <div class="form-row align-items-center container-fluid">
+                    <div class="col-auto my-1">
+                        <label for="exampleFormControlSelect1" style="margin-bottom:0rem">Bulan: </label>
+                    </div>
+                    <div class="col-auto my-1">
+                        <select class="custom-select mr-sm-2" name="bulan_month" id="id_bulan_month">
+                            <option value="01" {% if request.GET.bulan_month == '01' %}selected {% endif %}>Januari</option>
+                            <option value="02" {% if request.GET.bulan_month == '02' %}selected {% endif %}>Februari</option>
+                            <option value="03" {% if request.GET.bulan_month == '03' %}selected {% endif %}>Maret</option>
+                            <option value="04" {% if request.GET.bulan_month == '04' %}selected {% endif %}>April</option>
+                            <option value="05" {% if request.GET.bulan_month == '05' %}selected {% endif %}>Mei</option>
+                            <option value="06" {% if request.GET.bulan_month == '06' %}selected {% endif %}>Juni</option>
+                            <option value="07" {% if request.GET.bulan_month == '07' %}selected {% endif %}>Juli</option>
+                            <option value="08" {% if request.GET.bulan_month == '08' %}selected {% endif %}>Agustus</option>
+                            <option value="09" {% if request.GET.bulan_month == '09' %}selected {% endif %}>September</option>
+                            <option value="10" {% if request.GET.bulan_month == '10' %}selected {% endif %}>Oktober</option>
+                            <option value="11" {% if request.GET.bulan_month == '11' %}selected {% endif %}>November</option>
+                            <option value="12" {% if request.GET.bulan_month == '12' %}selected {% endif %}>Desember</option>
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                        <select class="custom-select mr-sm-2" name="bulan_year" id="id_bulan_year">
+                            <option value="2020" {% if request.GET.bulan_year == '2020' %}selected {% endif %}>2020</option>
+                        </select>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"> Cari</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Page Heading
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+    <!-- DataTable -->
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Data Pegawai ASN</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nama Pegawai</th>
+                        <th>NIP</th>
+                        <th>THP</th>
+                        <th>DPI</th>
+                        <th>Iuran 1%</th>
+                        <th>Iuran 4%</th>
+                        <th>Iuran 5%</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Nama Pegawai</th>
+                        <th>NIP</th>
+                        <th>THP</th>
+                        <th>DPI</th>
+                        <th>Iuran 1%</th>
+                        <th>Iuran 4%</th>
+                        <th>Iuran 5%</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for data in queryset %}
+                    <tr>
+                        <td>{{data.nama_pegawai}}</td>
+                        <td>{{data.nip}}</td>
+                        <td>{{data.THP|intcomma}}</td>
+                        <td>{{data.DPI|intcomma}}</td>
+                        <td>{{data.iuran1|floatformat:"0"|intcomma}}</td>
+                        <td>{{data.iuran4|floatformat:"0"|intcomma}}</td>
+                        <td>{{data.iuran5|floatformat:"0"|intcomma}}</td>
+                        <td><a href="{% url 'arip:updatepegawai' data.id %}" class="badge badge-primary" target="_blank">Edit</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- /.container-fluid -->
+{% endblock %}
