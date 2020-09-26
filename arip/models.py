@@ -87,7 +87,9 @@ class DataPegawai(models.Model):
 
     @cached_property
     def THP(self):
-        return self.gaji_pokok + self.tunjangan_istri + self.tunjangan_anak + self.tunjangan_eselon + self.tunjangan_fungsional + self.tunjangan_struktural + self.tunjangan_umum + self.tunjangan_sertifikasi + self.tunjangan_jasa_medis + self.tunjangan_penghasilan_pegawai
+        return self.gaji_pokok + self.tunjangan_istri + self.tunjangan_anak + self.tunjangan_eselon + \
+               self.tunjangan_fungsional + self.tunjangan_struktural + self.tunjangan_umum + \
+               self.tunjangan_sertifikasi + self.tunjangan_jasa_medis + self.tunjangan_penghasilan_pegawai
 
     # def DPI(self):
     #     if self.THP > 12000000:
@@ -105,7 +107,8 @@ class DataPegawai(models.Model):
     #     return self.iuran1() + self.iuran4()
 
     # def gaji_induk(self):
-    #     return self.gaji_pokok + self.tunjangan_istri + self.tunjangan_anak + self.tunjangan_eselon + self.tunjangan_fungsional + self.tunjangan_struktural + self.tunjangan_umum 
+    #     return self.gaji_pokok + self.tunjangan_istri + self.tunjangan_anak + self.tunjangan_eselon
+    #     + self.tunjangan_fungsional + self.tunjangan_struktural + self.tunjangan_umum
 
     # def sisaiuran1(self):
     #     return self.gaji_induk - self.iuran1
