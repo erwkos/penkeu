@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'simple_history',
     'django_filters',
     'import_export',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

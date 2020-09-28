@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import DataPegawai, BayarTagihan, Rekonsiliasi
 from django.contrib.auth.decorators import login_required
-# from .filters import DataPegawaiFilter, BayarTagihanFilter, RekonsiliasiFilter
+from .filters import DataPegawaiFilter, BayarTagihanFilter, RekonsiliasiFilter
 from .forms import UpdatePegawaiForm, UploadBuktiBayarForm, RekonsiliasiForm
 from django.db.models import Sum
 from penkeu.decorators import duta_only, allowed_users
@@ -9,16 +9,18 @@ from penkeu.decorators import duta_only, allowed_users
 
 @login_required(login_url="/login")
 def datapegawai(request):
-    bulan_month = request.GET.get('bulan_month')
-    bulan_year = request.GET.get('bulan_year')
-    queryset = DataPegawai.objects.filter(user=request.user, bulan__month=bulan_month, bulan__year=bulan_year,
+    tglgaji_month = request.GET.get('tglgaji_month')
+    tglgaji_year = request.GET.get('tglgaji_year')
+    queryset = DataPegawai.objects.filter(user=request.user, tglgaji__month=tglgaji_month, tglgaji__year=tglgaji_year,
                                           status_pegawai='Aktif')
 
     # filter
     myFilter = DataPegawaiFilter(request.GET, queryset=queryset)
     queryset = myFilter.qs
 
-    context = {'queryset': queryset}
+    context = {'queryset': queryset,
+               'myFilter': myFilter
+               }
     return render(request, 'arip/datapegawai.html', context)
 
 
@@ -37,9 +39,9 @@ def updatepegawai(request, id):
 
 @login_required(login_url="/login")
 def dashboardSKPD(request):
-    bulan_month = request.GET.get('bulan_month')
-    bulan_year = request.GET.get('bulan_year')
-    queryset = DataPegawai.objects.filter(user=request.user, bulan__month=bulan_month, bulan__year=bulan_year,
+    tglgaji_month = request.GET.get('tglgaji_month')
+    tglgaji_year = request.GET.get('tglgaji_year')
+    queryset = DataPegawai.objects.filter(user=request.user, tglgaji__month=tglgaji_month, tglgaji__year=tglgaji_year,
                                           status_pegawai='Aktif')
 
     # filter
@@ -48,16 +50,16 @@ def dashboardSKPD(request):
 
     # dashboard counts
     jumlah_pegawai = queryset.count()
-    jumlah_suami_istri = queryset.aggregate(Sum('jumlah_suami_istri'))['jumlah_suami_istri__sum'] or 0
-    jumlah_anak = queryset.aggregate(Sum('jumlah_anak'))['jumlah_anak__sum'] or 0
+    jumlah_suami_istri = queryset.aggregate(Sum('jistri'))['jistri__sum'] or 0
+    jumlah_anak = queryset.aggregate(Sum('janak'))['janak__sum'] or 0
     jumlah_tanggungan = jumlah_suami_istri + jumlah_anak
-    gaji_pokok = queryset.aggregate(Sum('gaji_pokok'))['gaji_pokok__sum'] or 0
-    tunjangan_istri = queryset.aggregate(Sum('tunjangan_istri'))['tunjangan_istri__sum'] or 0
-    tunjangan_anak = queryset.aggregate(Sum('tunjangan_anak'))['tunjangan_anak__sum'] or 0
-    tunjangan_eselon = queryset.aggregate(Sum('tunjangan_eselon'))['tunjangan_eselon__sum'] or 0
-    tunjangan_fungsional = queryset.aggregate(Sum('tunjangan_fungsional'))['tunjangan_fungsional__sum'] or 0
-    tunjangan_struktural = queryset.aggregate(Sum('tunjangan_struktural'))['tunjangan_struktural__sum'] or 0
-    tunjangan_umum = queryset.aggregate(Sum('tunjangan_umum'))['tunjangan_umum__sum'] or 0
+    gaji_pokok = queryset.aggregate(Sum('gapok'))['gapok__sum'] or 0
+    tunjangan_istri = queryset.aggregate(Sum('tjistri'))['tjistri__sum'] or 0
+    tunjangan_anak = queryset.aggregate(Sum('tjanak'))['tjanak__sum'] or 0
+    tunjangan_eselon = queryset.aggregate(Sum('tjeselon'))['tjeselon__sum'] or 0
+    tunjangan_fungsional = queryset.aggregate(Sum('tjfungsi'))['tjfungsi__sum'] or 0
+    tunjangan_struktural = queryset.aggregate(Sum('tjstruk'))['tjstruk__sum'] or 0
+    tunjangan_umum = queryset.aggregate(Sum('tjumum'))['tjumum__sum'] or 0
     tunjangan_sertifikasi = queryset.aggregate(Sum('tunjangan_sertifikasi'))['tunjangan_sertifikasi__sum'] or 0
     tunjangan_jasa_medis = queryset.aggregate(Sum('tunjangan_jasa_medis'))['tunjangan_jasa_medis__sum'] or 0
     tunjangan_penghasilan_pegawai = queryset.aggregate(Sum('tunjangan_penghasilan_pegawai'))[
@@ -83,9 +85,10 @@ def dashboardSKPD(request):
 @duta_only
 @allowed_users(allowed_roles=['duta'])
 def dashboardduta(request):
-    bulan_month = request.GET.get('bulan_month')
-    bulan_year = request.GET.get('bulan_year')
-    queryset = DataPegawai.objects.filter(bulan__month=bulan_month, bulan__year=bulan_year, status_pegawai='Aktif')
+    tglgaji_month = request.GET.get('tglgaji_month')
+    tglgaji_year = request.GET.get('tglgaji_year')
+    queryset = DataPegawai.objects.filter(tglgaji__month=tglgaji_month, tglgaji__year=tglgaji_year,
+                                          status_pegawai='Aktif')
 
     # filter
     myFilter = DataPegawaiFilter(request.GET, queryset=queryset)
@@ -93,16 +96,16 @@ def dashboardduta(request):
 
     # dashboard counts
     jumlah_pegawai = queryset.count()
-    jumlah_suami_istri = queryset.aggregate(Sum('jumlah_suami_istri'))['jumlah_suami_istri__sum'] or 0
-    jumlah_anak = queryset.aggregate(Sum('jumlah_anak'))['jumlah_anak__sum'] or 0
+    jumlah_suami_istri = queryset.aggregate(Sum('jistri'))['jistri__sum'] or 0
+    jumlah_anak = queryset.aggregate(Sum('janak'))['janak__sum'] or 0
     jumlah_tanggungan = jumlah_suami_istri + jumlah_anak
-    gaji_pokok = queryset.aggregate(Sum('gaji_pokok'))['gaji_pokok__sum'] or 0
-    tunjangan_istri = queryset.aggregate(Sum('tunjangan_istri'))['tunjangan_istri__sum'] or 0
-    tunjangan_anak = queryset.aggregate(Sum('tunjangan_anak'))['tunjangan_anak__sum'] or 0
-    tunjangan_eselon = queryset.aggregate(Sum('tunjangan_eselon'))['tunjangan_eselon__sum'] or 0
-    tunjangan_fungsional = queryset.aggregate(Sum('tunjangan_fungsional'))['tunjangan_fungsional__sum'] or 0
-    tunjangan_struktural = queryset.aggregate(Sum('tunjangan_struktural'))['tunjangan_struktural__sum'] or 0
-    tunjangan_umum = queryset.aggregate(Sum('tunjangan_umum'))['tunjangan_umum__sum'] or 0
+    gaji_pokok = queryset.aggregate(Sum('gapok'))['gapok__sum'] or 0
+    tunjangan_istri = queryset.aggregate(Sum('tjistri'))['tjistri__sum'] or 0
+    tunjangan_anak = queryset.aggregate(Sum('tjanak'))['tjanak__sum'] or 0
+    tunjangan_eselon = queryset.aggregate(Sum('tjeselon'))['tjeselon__sum'] or 0
+    tunjangan_fungsional = queryset.aggregate(Sum('tjfungsi'))['tjfungsi__sum'] or 0
+    tunjangan_struktural = queryset.aggregate(Sum('tjstruk'))['tjstruk__sum'] or 0
+    tunjangan_umum = queryset.aggregate(Sum('tjumum'))['tjumum__sum'] or 0
     tunjangan_sertifikasi = queryset.aggregate(Sum('tunjangan_sertifikasi'))['tunjangan_sertifikasi__sum'] or 0
     tunjangan_jasa_medis = queryset.aggregate(Sum('tunjangan_jasa_medis'))['tunjangan_jasa_medis__sum'] or 0
     tunjangan_penghasilan_pegawai = queryset.aggregate(Sum('tunjangan_penghasilan_pegawai'))[
@@ -135,9 +138,9 @@ def dashboardduta(request):
 @login_required(login_url="/login")
 @allowed_users(allowed_roles=['duta'])
 def history(request):
-    bulan_month = request.GET.get('bulan_month')
-    bulan_year = request.GET.get('bulan_year')
-    queryset = DataPegawai.objects.filter(bulan__month=bulan_month, bulan__year=bulan_year)
+    tglgaji_month = request.GET.get('tglgaji_month')
+    tglgaji_year = request.GET.get('tglgaji_year')
+    queryset = DataPegawai.objects.filter(bulan__month=tglgaji_month, bulan__year=tglgaji_year)
 
     # filter
     myFilter = DataPegawaiFilter(request.GET, queryset=queryset)

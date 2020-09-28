@@ -13,7 +13,7 @@
       <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
     </div>
 
-    <!-- Search Bulan -->
+    <!-- Search tglgaji -->
     <div class="card shadow mb-4" >
       <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-danger">Pilih Bulan</h6>
@@ -22,27 +22,27 @@
         <div class="card-body">
             <div class="form-row align-items-center container-fluid">
                 <div class="col-auto my-1">
-                    <label for="exampleFormControlSelect1" style="margin-bottom:0rem">Bulan: </label>
+                    <label for="exampleFormControlSelect1" style="margin-bottom:0">Bulan: </label>
                 </div>
                 <div class="col-auto my-1">
-                    <select class="custom-select mr-sm-2" name="bulan_month" id="id_bulan_month">
-                        <option value="01" {% if request.GET.bulan_month == '01' %}selected {% endif %}>Januari</option>
-                        <option value="02" {% if request.GET.bulan_month == '02' %}selected {% endif %}>Februari</option>
-                        <option value="03" {% if request.GET.bulan_month == '03' %}selected {% endif %}>Maret</option>
-                        <option value="04" {% if request.GET.bulan_month == '04' %}selected {% endif %}>April</option>
-                        <option value="05" {% if request.GET.bulan_month == '05' %}selected {% endif %}>Mei</option>
-                        <option value="06" {% if request.GET.bulan_month == '06' %}selected {% endif %}>Juni</option>
-                        <option value="07" {% if request.GET.bulan_month == '07' %}selected {% endif %}>Juli</option>
-                        <option value="08" {% if request.GET.bulan_month == '08' %}selected {% endif %}>Agustus</option>
-                        <option value="09" {% if request.GET.bulan_month == '09' %}selected {% endif %}>September</option>
-                        <option value="10" {% if request.GET.bulan_month == '10' %}selected {% endif %}>Oktober</option>
-                        <option value="11" {% if request.GET.bulan_month == '11' %}selected {% endif %}>November</option>
-                        <option value="12" {% if request.GET.bulan_month == '12' %}selected {% endif %}>Desember</option>
+                    <select class="custom-select mr-sm-2" name="tglgaji_month" id="id_tglgaji_month">
+                        <option value="01" {% if request.GET.tglgaji_month == '01' %}selected {% endif %}>Januari</option>
+                        <option value="02" {% if request.GET.tglgaji_month == '02' %}selected {% endif %}>Februari</option>
+                        <option value="03" {% if request.GET.tglgaji_month == '03' %}selected {% endif %}>Maret</option>
+                        <option value="04" {% if request.GET.tglgaji_month == '04' %}selected {% endif %}>April</option>
+                        <option value="05" {% if request.GET.tglgaji_month == '05' %}selected {% endif %}>Mei</option>
+                        <option value="06" {% if request.GET.tglgaji_month == '06' %}selected {% endif %}>Juni</option>
+                        <option value="07" {% if request.GET.tglgaji_month == '07' %}selected {% endif %}>Juli</option>
+                        <option value="08" {% if request.GET.tglgaji_month == '08' %}selected {% endif %}>Agustus</option>
+                        <option value="09" {% if request.GET.tglgaji_month == '09' %}selected {% endif %}>September</option>
+                        <option value="10" {% if request.GET.tglgaji_month == '10' %}selected {% endif %}>Oktober</option>
+                        <option value="11" {% if request.GET.tglgaji_month == '11' %}selected {% endif %}>November</option>
+                        <option value="12" {% if request.GET.tglgaji_month == '12' %}selected {% endif %}>Desember</option>
                         </select>
                 </div>
                 <div class="col-auto my-1">
-                    <select class="custom-select mr-sm-2" name="bulan_year" id="id_bulan_year">
-                        <option value="2020" {% if request.GET.bulan_year == '2020' %}selected {% endif %}>2020</option>
+                    <select class="custom-select mr-sm-2" name="tglgaji_year" id="id_tglgaji_year">
+                        <option value="2020" {% if request.GET.tglgaji_year == '2020' %}selected {% endif %}>2020</option>
                     </select>
                 </div>
                 <div class="col-auto my-1">
@@ -64,7 +64,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jlh Pegawai ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jlh Pegawai ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                   {% if jumlah_pegawai == 0 %}
                     -
@@ -87,7 +87,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Jlh Tanggungan ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Jlh Tanggungan ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                 {% if jumlah_tanggungan == 0 %}
                   -
@@ -110,7 +110,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Gaji Pokok ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Gaji Pokok ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -137,7 +137,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Tunjangan Istri ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Tunjangan Istri ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                 {% if tunjangan_istri == 0 %}
                   -
@@ -164,7 +164,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tunjangan Anak ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tunjangan Anak ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                   {% if tunjangan_anak == 0 %}
                     -
@@ -187,7 +187,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tunjungan Eselon ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tunjungan Eselon ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                 {% if tunjangan_eselon == 0 %}
                   -
@@ -210,7 +210,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tunj. Fungsional ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tunj. Fungsional ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -237,7 +237,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Tunj. Struktural ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Tunj. Struktural ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                 {% if tunjangan_struktural == 0 %}
                   -
@@ -264,7 +264,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tunj. Umum ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tunj. Umum ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                   {% if tunjangan_umum == 0 %}
                     -
@@ -287,7 +287,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tunj. Sertifikasi ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Tunj. Sertifikasi ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                 {% if tunjangan_sertifikasi == 0 %}
                   -
@@ -310,7 +310,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tunj. Medis ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tunj. Medis ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="row no-gutters align-items-center">
                   <div class="col-auto">
                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -337,7 +337,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Jlh. TPP ({{request.GET.bulan_month}}-{{request.GET.bulan_year}})</div>
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Jlh. TPP ({{request.GET.tglgaji_month}}-{{request.GET.tglgaji_year}})</div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                 {% if tunjangan_penghasilan_pegawai == 0 %}
                   -

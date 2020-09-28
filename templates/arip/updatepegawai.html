@@ -58,7 +58,7 @@
             <table>
                 <tr>
                     <td>Nama Lengkap</th>
-                    <td>: {{datapegawai.nama_pegawai}}</td>
+                    <td>: {{datapegawai.nama}}</td>
                 </tr>
                 <tr>
                     <td>NIP</th>
@@ -66,7 +66,7 @@
                 </tr>
                 <tr>
                     <td>SKPD</th>
-                    <td>: {{datapegawai.skpd}}</td>
+                    <td>: {{datapegawai.nmskpd}}</td>
                 </tr>
                 <tr>
                     <td>Pemda</th>
@@ -74,7 +74,7 @@
                 </tr>
                 <tr>
                     <td>Bulan Penagihan</th>
-                    <td>: {{datapegawai.bulan|date:'M-Y'}}</td>
+                    <td>: {{datapegawai.tglgaji|date:'M-Y'}}</td>
                 </tr>
             </table>
         </div>
@@ -94,39 +94,39 @@
                         <table>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Jumlah Suami/Istri</label></th>
-                                <td>{{form.jumlah_suami_istri}}</td>
+                                <td>{{form.jistri}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Jumlah Anak</label></th>
-                                <td>{{form.jumlah_anak}}</td>
+                                <td>{{form.janak}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Gaji Pokok</label></th>
-                                <td>{{form.gaji_pokok}}</td>
+                                <td>{{form.gapok}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Istri</label></th>
-                                <td>{{form.tunjangan_istri}}</td>
+                                <td>{{form.tjistri}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Anak</label></th>
-                                <td>{{form.tunjangan_anak}}</td>
+                                <td>{{form.tjanak}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Eselon</label></th>
-                                <td>{{form.tunjangan_eselon}}</td>
+                                <td>{{form.tjeselon}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Fungsional</label></th>
-                                <td>{{form.tunjangan_fungsional}}</td>
+                                <td>{{form.tjfungsi}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Struktural</label></th>
-                                <td>{{form.tunjangan_struktural}}</td>
+                                <td>{{form.tjstruk}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Umum</label></th>
-                                <td>{{form.tunjangan_umum}}</td>
+                                <td>{{form.tjumum}}</td>
                             </tr>
                             <tr>
                                 <td><label for="" style="margin-bottom:0rem">Tunjangan Sertifikasi</label></th>

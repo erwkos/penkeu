@@ -87,34 +87,33 @@ class DataPegawai(models.Model):
 
     @cached_property
     def THP(self):
-        return self.gaji_pokok + self.tunjangan_istri + self.tunjangan_anak + self.tunjangan_eselon + \
-               self.tunjangan_fungsional + self.tunjangan_struktural + self.tunjangan_umum + \
+        return self.gapok + self.tjistri + self.tjanak + self.tjeselon + \
+               self.tjfungsi + self.tjstruk + self.tjumum + \
                self.tunjangan_sertifikasi + self.tunjangan_jasa_medis + self.tunjangan_penghasilan_pegawai
 
-    # def DPI(self):
-    #     if self.THP > 12000000:
-    #         return 12000000
-    #     else:
-    #         return self.THP
+    def DPI(self):
+        if self.THP > 12000000:
+            return 12000000
+        else:
+            return self.THP
 
-    # def iuran1(self):
-    #     return 0.01 * self.DPI()
+    def iuran1(self):
+        return 0.01 * self.DPI()
 
-    # def iuran4(self):
-    #     return 0.04 * self.DPI()
+    def iuran4(self):
+        return 0.04 * self.DPI()
 
-    # def iuran5(self):
-    #     return self.iuran1() + self.iuran4()
+    def iuran5(self):
+        return self.iuran1() + self.iuran4()
 
-    # def gaji_induk(self):
-    #     return self.gaji_pokok + self.tunjangan_istri + self.tunjangan_anak + self.tunjangan_eselon
-    #     + self.tunjangan_fungsional + self.tunjangan_struktural + self.tunjangan_umum
+    def gaji_induk(self):
+        return self.gapok + self.tjistri + self.tjanak + self.tjeselon + self.tjfungsi + self.tjstruk + self.tjumum
 
-    # def sisaiuran1(self):
-    #     return self.gaji_induk - self.iuran1
+    def sisaiuran1(self):
+        return self.gaji_induk - self.iuran1
 
-    # def sisaiuran4(self):
-    #     return self.gaji_induk - self.iuran4
+    def sisaiuran4(self):
+        return self.gaji_induk - self.iuran4
 
-    # def sisaiuran5(self):
-    #     return self.sisaiuran1 + self.sisaiuran4
+    def sisaiuran5(self):
+        return self.sisaiuran1 + self.sisaiuran4
